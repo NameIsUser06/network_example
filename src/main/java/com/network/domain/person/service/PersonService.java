@@ -28,6 +28,15 @@ public class PersonService {
 
     public List<PersonResponseDto> getInfo() {
         List<Person> persons = personRepository.findAll();
+        return getPersonResponse(persons);
+    }
+
+    public List<PersonResponseDto> getFetchInfo() {
+        List<Person> persons = personRepository.findAllFetchJoin();
+        return getPersonResponse(persons);
+    }
+
+    private List<PersonResponseDto> getPersonResponse(List<Person> persons) {
         List<PersonResponseDto> responses = new ArrayList<>();
 
         for (Person person : persons) {
@@ -39,5 +48,10 @@ public class PersonService {
         }
 
         return responses;
+    }
+
+    public String getName(Long id) {
+        Person person = personRepository.findById(id).orElseThrow();
+        return person.getName();
     }
 }

@@ -23,8 +23,18 @@ public class PersonController {
         personService.create(dto);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getName(@PathVariable Long id) {
+        return ResponseEntity.ok(personService.getName(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<PersonResponseDto>> getPersonInfo() {
         return ResponseEntity.ok(personService.getInfo());
+    }
+
+    @GetMapping("/fetch")
+    public ResponseEntity<List<PersonResponseDto>> getFetchPersonInfo() {
+        return ResponseEntity.ok(personService.getFetchInfo());
     }
 }
